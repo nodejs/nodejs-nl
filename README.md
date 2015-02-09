@@ -17,7 +17,7 @@ and we'll add you to the team.
 
 ## FAQ NL
 #### Wat is deze repository?
-Deze repo is een van de vele die zich focust op het brengen van o.a. de io.js documentatie  naar meerdere talen. In dit geval Nederlands.
+Deze repo is een van de vele die zich focust op het brengen van o.a. de io.js-documentatie  naar meerdere talen, in dit geval Nederlands.
 
 #### Klinkt cool. Kan ik mee doen?
 Zeker! Open een issue op deze repo en zeg ons hoe wij jouw kunnen helpen of jij ons!
