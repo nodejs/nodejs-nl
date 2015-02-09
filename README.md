@@ -4,6 +4,7 @@
 ## Members
 - Yoshua Wuyts ([@yoshuawuyts](https://github.com/yoshuawuyts))
 - Tim De Pauw ([@timdp](https://github.com/timdp))
+- Adri Van Houdt ([@AdriVanHoudt](https://github.com/adrivanhoudt))
 
 ## FAQ
 #### What is this repository? 
