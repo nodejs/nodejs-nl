@@ -24,7 +24,7 @@
 processes aware of the PATH changes.
 * Added new collaborators:
 - Vladimir Kurchatkin (@vkurchatkin)
-- Micleușanu Nicu (@micnic)
+- Micleu?anu Nicu (@micnic)
 
 ### Known issues
 
@@ -248,7 +248,7 @@ to 3-Stable
 * 3dd7ebb - doc: update cluster entry in CHANGELOG (Ben Noordhuis)
 * 0c5de1f - doc: fix double smalloc example (Mathias Buus)
 
-## 2015-01-14, Version 1.0.1, @rvagg
+## 2015-01-14, Version 1.0.1, @rvagg //TODO this and above
 
 Rebuild due to stale build slave git reflogs for 1.0.0 release
 
@@ -263,9 +263,9 @@ Node.js release is v0.11.14 with much progress made towards a v0.11.15 release. 
 the majority of the changes found in the v0.11 branch of the [joyent/node](https://github.com/joyent/node)
 repository and therefore can be seen as an extension to v0.11.
 
-## Summary of changes from Node.js v0.10.35 to io.js v1.0.0
+## Overzicht van de veranderinen van Node.js v0.10.35 naar io.js v1.0.0
 
-### General
+### Algemeen
 
 - The V8 JavaScript engine bundled with io.js was upgraded dramatically, from version 3.14.5.9 in Node.js v0.10.35 and 3.26.33 in Node.js v0.11.14 to 3.31.74.1 for io.js v1.0.0. This brings along many fixes and performance improvements, as well as additional support for new ES6 language features! For more information on this, check out [the io.js ES6 page](https://iojs.org/es6.html).
 - Other bundled technologies were upgraded:
@@ -406,47 +406,44 @@ https://iojs.org/api/querystring.html
 
 https://iojs.org/api/smalloc.html
 
-`smalloc` is a new core module for doing (external) raw memory allocation/deallocation/copying in JavaScript.
+`smalloc` is een nieuwe _core_ module voor (externe) _raw memory allocation/deallocation/copying_ in Javascript.
 
 ### streams
 
 https://iojs.org/api/stream.html
 
-The changes to streams are not as drastic as the transition from streams1 to streams2: they are a
-refinement of existing ideas, and should make the API slightly less surprising for humans and faster
-for computers. As a whole the changes are referred to as "streams3", but the changes should largely go
-unnoticed by the majority of stream consumers and implementers.
+De veranderinen aan de _streams_ zijn niet zo drastisch als de overgang van _streams1_ naar _streams2_.
+Ze zijn eerder een verfijning van de bestaande ideeën en moeten de API duidelijker maken voor mensen en sneller voor computers.
+In zijn geheel word er naar de veranderingen verwezen als _"streams3"_ maar de veranderingen zouden grotendeels onopgemerkt moeten blijven voor de meerderheid van de _stream_ gebruikers. 
 
 #### Readable streams
 
-The distinction between "flowing" and "non-flowing" modes has been refined. Entering "flowing" mode is
-no longer an irreversible operation&mdash;it is possible to return to "non-flowing" mode from "flowing" mode.
-Additionally, the two modes now flow through the same machinery instead of replacing methods. Any time
-data is returned as a result of a `.read` call that data will *also* be emitted on the `"data"` event.
+De distictie tussen _"flowing"_ en _"non-flowing"_ modusen is geoptimaliseerd. In _"flowing"_ modus gaan is niet langer een onomkeerbare operatie.
+Het is mogelijk om terug naar een _"non-flowing"_ modus te gaan vanuit een _"flowing"_ modus.
+Alsook, de twee modi vloeien nu door dezelfde code in plaats van methodes te vervangen.
+Elke keer data word teruggeven als resultaat van een `.read` _call_ word die data *ook* uitgezonden op het `"data"` event.
 
-As before, adding a listener for the `"readable"` or `"data"` event will start flowing the stream; as
-will piping to another stream.
+Zoals eerder zal het toevoegen van een _listener_ op de `"readable"` en `"data"` events de _stream_ doen stromen, net zoals het pijpen naar een andere _stream_.
 
 #### Writable streams
 
-The ability to "bulk write" to underlying resources has been added to `Writable` streams. For stream
-implementers, one can signal that a stream is bulk-writable by specifying a [_writev](https://iojs.org/api/stream.html#stream_writable_writev_chunks_callback) method.
-Bulk writes will occur in two situations:
+De mogelijkheid om een "_bulk write_" te doen op onderligende middelen is toegevoegd aan de `Writeable` _stream_.
+Voor _stream_ implementeerders, je kan signaliseren dat een _stream bulk-writable_ is door een [_writev](https://iojs.org/api/stream.html#stream_writable_writev_chunks_callback) methode te specifiëren.
+_Bulk writes_ komen voor in 2 situaties:
 
-1. When a bulk-writable stream is clearing its backlog of buffered write requests,
-2. or if an end user has made use of the new `.cork()` and `.uncork()` API methods.
+1. Wanneer een _bulk-writable stream_ zijn backlog van gebufferde schrijf verzoeken aan het opkuisen is.
+2. of als een eindgebruiker gebruikt maakt van de nieuwe `.cork()` en `.uncork()` API methodes.
 
-`.cork` and `.uncork` allow the end user to control the buffering behavior of writable streams separate
-from exerting backpressure. `.cork` indicates that the stream should accept new writes (up to `highWaterMark`),
-while `.uncork` resets that behavior and attempts to bulk-write all buffered writes to the underlying resource.
+`.cork` en `.uncork` geven de eindgebruiker controle over het gedrag van het bufferen van de _writable streams_ onafhankelijk van de uitgeoefende tegendruk.
+`.cork` duid aan dat de _stream_ nieuwe schrijf operaties zou moeten accepteren (tot op `highWaterMark`),
+`.uncork` reset dat gedrag en probeerd een _bulk-write_ te doen van alle gebuferde schrijf opdrachten naar de onderligende middelen.
 
-The only core stream API that **currently** implements `_writev` is `net.Socket`.
+De enigste _core stream_ API die **momenteel** `_writev` implementeerd is `net.Socket`.
 
-In addition to the bulk-write changes, the performance of repeated small writes to non-bulk-writable streams
-(such as `fs.WriteStream`) has been drastically improved. Users piping high volume log streams to disk should
-see an improvement.
+In toevoeging tot de _bulk-write_ veranderingen is ook de performantie van repetitieve kleine schrijf operaties naar _non-bulk-writable streams_ (zoals de `fs.WriteStream`) er sterk op vooruit gegaan.
+Gebruikers die grote log volume _streams_ naar de harde schijf pijpen zouden een vooruitgang moeten zien.  
 
-For a detailed overview of how streams3 interact, [see this diagram](https://cloud.githubusercontent.com/assets/37303/5728694/f9a3e300-9b20-11e4-9e14-a6938b3327f0.png).
+Voor een gedetaileerd overzicht van hoe _streams3_ werken [zie did diagram](https://cloud.githubusercontent.com/assets/37303/5728694/f9a3e300-9b20-11e4-9e14-a6938b3327f0.png).
 
 ### timers
 
@@ -498,13 +495,13 @@ https://iojs.org/api/util.html
 
 https://iojs.org/api/v8.html
 
-`v8` is a new core module for interfacing directly with the V8 engine.
+`v8` is een nieuwe core module for directe communicatie met de V8 engine.
 
 ### vm
 
 https://iojs.org/api/vm.html
 
-The `vm` module has been rewritten to work better, based on the excellent [Contextify](https://github.com/brianmcd/contextify) native module. All of the functionality of Contextify is now in core, with improvements!
+De `vm` module is herschreven, gebaseerd op de excellente native module [Contextify](https://github.com/brianmcd/contextify), om beter te werken. Alle funtionaliteit van Contextify zit nu mee in de core, zelfs met verbeteringen!
 
 - Added `vm.isContext(object)` method to determine whether `object` has been contextified.
 - Added `vm.runInDebugContext(code)` method to compile and execute `code` inside the V8 debug context.
@@ -512,7 +509,7 @@ The `vm` module has been rewritten to work better, based on the excellent [Conte
 - Updated most `vm` and `vm.Script` methods to accept an `options` object, allowing you to configure a timeout for the script, the error display behavior, and sometimes the filename (for stack traces).
 - Updated the supplied sandbox object to be used directly as the global, remove error-prone copying of properties back and forth between the supplied sandbox object and the global that appears inside the scripts run by the `vm` module.
 
-For more information, see the `vm` documentation linked above.
+Voor meer informatie zie de `vm` documentatie die hierboven is gelinkt.
 
 ### zlib
 
@@ -526,7 +523,7 @@ https://iojs.org/api/zlib.html
 
 https://iojs.org/api/addons.html
 
-In general it is recommended that you use [NAN](https://github.com/rvagg/nan) as a compatibility layer for your addons. This will also help with future changes in the V8 and Node/io.js C++ API. Most of the following changes are already handled by NAN-specific wrappers.
+In het algemeen is het aangeraden om [NAN](https://github.com/rvagg/nan) te gebruiken als compatibiliteits laag voor addons. Dit zal ook helpen in opkomende veranderingen in de V8 en Node/io.js C++ API. Het merendeel van de volgende veranderinen worden al afgehandeld door NAN-specifieke wrappers
 
 #### V8 highlights
 
@@ -554,8 +551,7 @@ In general it is recommended that you use [NAN](https://github.com/rvagg/nan) as
 
 --------------------------------------
 
-**The changelog below was inherited from joyent/node prior to the io.js fork.**
-
+**De changelog hieronder is overgenomen van joyent/node voor de io.js fork**
 
 ## 2014.09.24, Version 0.11.14 (Unstable)
 
@@ -565,7 +561,7 @@ In general it is recommended that you use [NAN](https://github.com/rvagg/nan) as
 * openssl: Upgrade to v1.0.1i
 * v8: Upgrade to 3.26.33
 * Add fast path for simple URL parsing (Gabriel Wicke)
-* Added support for options parameter in console.dir() (Xavi Magrinyà)
+* Added support for options parameter in console.dir() (Xavi Magrinya`)
 * Cluster: fix shared handles on Windows (Alexis Campailla)
 * buffer: Fix incorrect Buffer.compare behavior (Feross Aboukhadijeh)
 * buffer: construct new buffer from buffer toJSON() output (cjihrig)
@@ -585,7 +581,7 @@ In general it is recommended that you use [NAN](https://github.com/rvagg/nan) as
 * cluster: restore v0.10.x setupMaster() behaviour (Ryan Graham)
 * cluster: support options in Worker constructor (cjihrig)
 * cluster: test events emit on cluster.worker (Sam Roberts)
-* console: console.dir() accepts options object (Xavi Magrinyà)
+* console: console.dir() accepts options object (Xavi Magrinya`)
 * crypto: add `honorCipherOrder` argument (Fedor Indutny)
 * crypto: allow padding in RSA methods (Fedor Indutny)
 * crypto: clarify RandomBytes() error msg (Mickael van der Beek)
@@ -593,7 +589,7 @@ In general it is recommended that you use [NAN](https://github.com/rvagg/nan) as
 * crypto: unsigned value can't be negative (Brian White)
 * dgram: remove new keyword from errnoException (Jackson Tian)
 * dns: always set variable family in lookup() (cjihrig)
-* dns: include host name in error message if available (Maciej Małecki)
+* dns: include host name in error message if available (Maciej Malecki)
 * dns: introduce lookupService function (Saúl Ibarra Corretgé)
 * dns: send lookup c-ares errors to callback (Chris Dickinson)
 * dns: throw if hostname is not string or falsey (cjihrig)
@@ -691,7 +687,7 @@ https://github.com/iojs/io.js/commit/7d6b8db40f32e817ff145b7cfe6b3aec3179fba7
 * dgram: pass the bytes sent to the send callback (Timothy J Fontaine)
 * dns: validate arguments in resolver (Kenan Sulayman)
 * dns: verify argument is valid function in resolve (Kenan Sulayman)
-* http: avoid duplicate keys in writeHead (David Björklund)
+* http: avoid duplicate keys in writeHead (David Bjo¨rklund)
 * net: add localPort to connect options (Timothy J Fontaine)
 * node: do not print SyntaxError hints to stderr (Fedor Indutny)
 * node: invoke `beforeExit` again if loop was active (Fedor Indutny)
@@ -753,7 +749,7 @@ https://github.com/iojs/io.js/commit/66931791f06207d1cdfea5ec1529edf3c94026d3
 * cluster: restore backwards compatibility and various fixes (Sam Roberts)
 * crypto: remove unnecessary OpenSSL_add_all_digests (Yorkie)
 * crypto: support GCM authenticated encryption mode. (Ingmar Runge)
-* dns: add resolveSoa and 'SOA' rrtype (Tuğrul Topuz)
+* dns: add resolveSoa and 'SOA' rrtype (Tugrul Topuz)
 * events: move EE c'tor guts to EventEmitter.init (Bert Belder)
 * http: DELETE shouldn't default to chunked encoding (Lalit Kapoor)
 * http: parse the status message in a http response. (Cam Swords)
@@ -1078,7 +1074,7 @@ https://github.com/iojs/io.js/commit/bc0ff830aff1e016163d855e86ded5c98b0899e8
 * deps: backport 4ed5fde4f from v8 upstream (Fedor Indutny)
 * deps: cherry-pick eca441b2 from OpenSSL (Fedor Indutny)
 * lib: remove and restructure calls to isNaN() (cjihrig)
-* module: eliminate double `getenv()` (Maciej Małecki)
+* module: eliminate double `getenv()` (Maciej Malecki)
 * stream2: flush extant data on read of ended stream (Chris Dickinson)
 * streams: remove unused require('assert') (Rod Vagg)
 * timers: backport f8193ab (Julien Gilli)
@@ -1091,7 +1087,7 @@ https://github.com/iojs/io.js/commit/ce82d6b8474bde7ac7df6d425fb88fb1bcba35bc
 
 * openssl: to 1.0.1h (CVE-2014-0224)
 * npm: upgrade to 1.4.14
-* utf8: Prevent Node from sending invalid UTF-8 (Felix Geisendörfer)
+* utf8: Prevent Node from sending invalid UTF-8 (Felix Geisendo¨rfer)
 - *NOTE* this introduces a breaking change, previously you could construct
 invalid UTF-8 and invoke an error in a client that was expecting valid
 UTF-8, now unmatched surrogate pairs are replaced with the unknown UTF-8
@@ -1203,10 +1199,10 @@ https://github.com/iojs/io.js/commit/cbff8f091c22fb1df6b238c7a1b9145db950fa65
 * child_process: don't assert on stale file descriptor events (Fedor Indutny)
 * darwin: Fix "Not Responding" in Mavericks activity monitor (Fedor Indutny)
 * debugger: Fix bug in sb() with unnamed script (Maxim Bogushevich)
-* repl: do not insert duplicates into completions (Maciej Małecki)
+* repl: do not insert duplicates into completions (Maciej Malecki)
 * src: Fix memory leak on closed handles (Timothy J Fontaine)
 * tls: prevent stalls by using read(0) (Fedor Indutny)
-* v8: use correct timezone information on Solaris (Maciej Małecki)
+* v8: use correct timezone information on Solaris (Maciej Malecki)
 
 ## 2013.10.18, Version 0.10.21 (Stable)
 
@@ -1406,7 +1402,7 @@ https://github.com/iojs/io.js/commit/9712aa9f76073c30850b20a188b1ed12ffb74d17
 * v8: Avoid excessive memory growth in JSON.parse (Fedor Indutny)
 * child_process, cluster: fix O(n*m) scan of cmd string (Ben Noordhuis)
 * net: fix socket.bytesWritten Buffers support (Fedor Indutny)
-* buffer: fix offset checks (Łukasz Walukiewicz)
+* buffer: fix offset checks (Lukasz Walukiewicz)
 * stream: call write cb before finish event (isaacs)
 * http: Support write(data, 'hex') (isaacs)
 * crypto: dh secret should be left-padded (Fedor Indutny)
@@ -1616,7 +1612,7 @@ https://github.com/iojs/io.js/commit/9313fdc71ca8335d5e3a391c103230ee6219b3e2
 * path: make basename and extname ignore trailing slashes (Bert Belder)
 * typed arrays: fix sunos signed/unsigned char issue (Ben Noordhuis)
 * child_process: Fix {stdio:'inherit'} regression (Ben Noordhuis)
-* child_process: Fix pipe() from child stdio streams  (Maciej Małecki)
+* child_process: Fix pipe() from child stdio streams  (Maciej Malecki)
 * child_process: make fork() execPath configurable (Bradley Meck)
 * stream: Add readable.push(chunk) method (isaacs)
 * dtrace: x64 ustack helper (Fedor Indutny)
@@ -1643,7 +1639,7 @@ https://github.com/iojs/io.js/commit/01994e8119c24f2284bac0779b32acb49c95bee7
 * http: Performance enhancements for http under streams2 (isaacs)
 * stream: fix to emit end event on http.ClientResponse (Shigeki Ohtsu)
 * stream: fix event handler leak in readstream pipe and unpipe (Andreas Madsen)
-* build: Support ./configure --tag switch (Maciej Małecki)
+* build: Support ./configure --tag switch (Maciej Malecki)
 * repl: don't touch `require.cache` (Nathan Rajlich)
 * node: Emit 'exit' event when exiting for an uncaught exception (isaacs)
 
@@ -2090,7 +2086,7 @@ https://github.com/iojs/io.js/commit/cc6084b9ac5cf1d4fe5e7165b71e8fc05d11be1f
 * readline: fix for unicode prompts (Tim Macfarlane)
 * timers: fix handling of large timeouts (Ben Noordhuis)
 * repl: fix passing an empty line inserting "undefined" into the buffer (Nathan Rajlich)
-* repl: fix crashes when buffering command (Maciej Małecki)
+* repl: fix crashes when buffering command (Maciej Malecki)
 * build: rename strict_aliasing to node_no_strict_aliasing (Ben Noordhuis)
 * build: disable -fstrict-aliasing for any gcc < 4.6.0 (Ben Noordhuis)
 * build: detect cc version with -dumpversion (Ben Noordhuis)
@@ -2283,7 +2279,7 @@ https://github.com/iojs/io.js/commit/5cda2542fdb086f9fe5de889bea435a65e377dea
 * typed arrays: add Uint8ClampedArray (Mikael Bourges-Sevenier)
 * buffer: Fix byte alignment issues (Ben Noordhuis, Erik Lundin)
 * tls: fix CryptoStream.setKeepAlive() (Shigeki Ohtsu)
-* Expose http parse error codes (Felix Geisendörfer)
+* Expose http parse error codes (Felix Geisendo¨rfer)
 * events: don't delete the listeners array (Ben Noordhuis, Nathan Rajlich)
 * process: add process.config to view node's ./configure settings (Nathan Rajlich)
 * process: process.execArgv to see node's arguments (Micheil Smith)
@@ -2303,7 +2299,7 @@ https://github.com/iojs/io.js/commit/f06abda6f58e517349d1b63a2cbf5a8d04a03505
 - Handle cases where an optionalDependency fails to build
 
 * events: newListener emit correct fn when using 'once' (Roly Fentanes)
-* url: Ignore empty port component (Łukasz Walukiewicz)
+* url: Ignore empty port component (Lukasz Walukiewicz)
 * module: replace 'children' array (isaacs)
 * tls: parse multiple values of a key in ssl certificate (Sambasiva Suda)
 * cluster: support passing of named pipes (Ben Noordhuis)
@@ -2321,7 +2317,7 @@ https://github.com/iojs/io.js/commit/f06abda6f58e517349d1b63a2cbf5a8d04a03505
 
 https://github.com/iojs/io.js/commit/d384b8b0d2ab7f05465f0a3e15fe20b4e25b5f86
 
-* startup speed improvements (Maciej Małecki)
+* startup speed improvements (Maciej Malecki)
 * crypto: add function getDiffieHellman() (Tomasz Buchert)
 * buffer: support decoding of URL-safe base64 (Ben Noordhuis)
 * Make QueryString.parse() even faster (Brian White)
@@ -2371,7 +2367,7 @@ https://github.com/iojs/io.js/commit/ec79acb3a6166e30f0bf271fbbfda1fb575b3321
 * Update V8 to 3.8.9
 * Support for sharing streams across Isolates (Igor Zinkovsky)
 * [#2636](https://github.com/joyent/node/issues/2636) - Fix case where http_parsers are freed too early (koichik)
-* url: Support for IPv6 addresses in URLs (Łukasz Walukiewicz)
+* url: Support for IPv6 addresses in URLs (Lukasz Walukiewicz)
 * child_process: Add disconnect() method to child processes (Andreas Madsen)
 * fs: add O_EXCL support, exclusive open file (Ben Noordhuis)
 * fs: more specific error messages (Tj Holowaychuk)
@@ -2390,7 +2386,7 @@ https://github.com/iojs/io.js/commit/a74354735ab5d5b0fa35a1e4ff7e653757d2069b
 * crypto: Add ability to turn off PKCS padding (Ingmar Runge)
 * v8: implement VirtualMemory class on SunOS (Ben Noordhuis)
 * Add cluster.setupMaster (Andreas Madsen)
-* move `path.exists*` to `fs.exists*` (Maciej Małecki)
+* move `path.exists*` to `fs.exists*` (Maciej Malecki)
 * typed arrays: set class name (Ben Noordhuis)
 * libuv bug fixes (Igor Zinkovsky, Ben Noordhuis, Dan VerWeire)
 
@@ -2440,7 +2436,7 @@ https://github.com/iojs/io.js/commit/4bc1d395de6abed2cf1e4d0b7b3a1480a21c368f
 * fs: Automatically close FSWatcher on error (Bert Belder)
 * [#3258](https://github.com/joyent/node/issues/3258): fs.ReadStream.pause() emits duplicate data event (koichik)
 * pipe_wrap: don't assert() on pipe accept errors (Ben Noordhuis)
-* Better exception output for module load and process.nextTick (Felix Geisendörfer)
+* Better exception output for module load and process.nextTick (Felix Geisendo¨rfer)
 * zlib: fix error reporting (Ben Noordhuis)
 * http: Don't destroy on timeout (isaacs)
 * [#3231](https://github.com/joyent/node/issues/3231): http: Don't try to emit error on a null'ed req object (isaacs)
@@ -2451,7 +2447,7 @@ https://github.com/iojs/io.js/commit/4bc1d395de6abed2cf1e4d0b7b3a1480a21c368f
 https://github.com/iojs/io.js/commit/4ced23deaf36493f4303a18f6fdce768c58becc0
 
 * Upgrade npm to 1.1.21
-* uv: Add support for EROFS errors (Ben Noordhuis, Maciej Małecki)
+* uv: Add support for EROFS errors (Ben Noordhuis, Maciej Malecki)
 * uv: Add support for EIO and ENOSPC errors (Fedor Indutny)
 * windows: Add support for EXDEV errors (Bert Belder)
 * http: Fix client memory leaks (isaacs, Vincent Voyer)
@@ -2659,7 +2655,7 @@ https://github.com/iojs/io.js/commit/9a059ea69e1f6ebd8899246682d8ca257610b8ab
 * cli: fix output of --help (Ben Noordhuis)
 * new website
 * pause/resume semantics for stdin (Isaac Z. Schlueter)
-* Travis CI integration (Maciej Małecki)
+* Travis CI integration (Maciej Malecki)
 * child_process: Fix bug regarding closed stdin (Ben Noordhuis)
 * Enable upgrades in MSI. (Igor Zinkovsky)
 * net: Fixes memory leak (Ben Noordhuis)
@@ -2750,7 +2746,7 @@ https://github.com/iojs/io.js/commit/865b077819a9271a29f982faaef99dc635b57fbc
 
 * print undefined on undefined values in REPL (Nathan Rajlich)
 * doc improvements (koichik, seebees, bnoordhuis,
-Maciej Małecki, Jacob Kragh)
+Maciej Malecki, Jacob Kragh)
 
 * support native addon loading in windows (Bert Belder)
 * rename getNetworkInterfaces() to networkInterfaces() (bnoordhuis)
@@ -2784,7 +2780,7 @@ https://github.com/iojs/io.js/commit/220e61c1f65bf4db09699fcf6399c0809c0bc446
 process.ENV, process.ARGV, process.memoryUsage().vsize, os.openOSHandle
 
 * Documentation improvments (Igor Zinkovsky, Bert Belder, Ilya Dmitrichenko,
-koichik, Maciej Małecki, Guglielmo Ferri, isaacs)
+koichik, Maciej Malecki, Guglielmo Ferri, isaacs)
 
 * Performance improvements (Daniel Ennis, Bert Belder, Ben Noordhuis)
 * Long process.title support (Ben Noordhuis)
@@ -2952,7 +2948,7 @@ https://github.com/iojs/io.js/commit/d2d53d4bb262f517a227cc178a1648094ba54c20
 * fix incorrect ssl shutdown check (Tom Hughes)
 * various cmake fixes (Tom Hughes)
 * improved documentation (Koichi Kobayashi, Logan Smyth, Fedor Indutny,
-Mikeal Rogers, Maciej Małecki, Antranig Basman, Mickaël Delahaye)
+Mikeal Rogers, Maciej Malecki, Antranig Basman, Mickaël Delahaye)
 
 * upgrade libuv to commit 835782a
 * upgrade V8 to 3.5.8
@@ -2995,7 +2991,7 @@ and 4231 (Stefan Bühler)
 * Add Socket::bytesRead, Socket::bytesWritten (Alexander Uvarov)
 * [#572](https://github.com/joyent/node/issues/572) Don't print result of --eval in CLI (Ben Noordhuis)
 * [#1223](https://github.com/joyent/node/issues/1223) Fix http.ClientRequest crashes if end() was called twice (koichik)
-* [#1383](https://github.com/joyent/node/issues/1383) Emit 'close' after all connections have closed (Felix Geisendörfer)
+* [#1383](https://github.com/joyent/node/issues/1383) Emit 'close' after all connections have closed (Felix Geisendo¨rfer)
 * Add sprintf-like util.format() function (Ben Noordhuis)
 * Add support for TLS SNI (Fedor Indutny)
 * New http agent implementation. Off by default the command line flag
@@ -3069,7 +3065,7 @@ SSL_OP_CRYPTOPRO_TLSEXT_BUG to TLS (Theo Schlossnagle)
 * [#851](https://github.com/joyent/node/issues/851) Update how REPLServer uses contexts (Ben Weaver)
 * [#853](https://github.com/joyent/node/issues/853) add fs.lchow, fs.lchmod, fs.fchmod, fs.fchown (isaacs)
 * [#889](https://github.com/joyent/node/issues/889) Allow to remove all EventEmitter listeners at once
-(Felix Geisendörfer)
+(Felix Geisendo¨rfer)
 
 * [#926](https://github.com/joyent/node/issues/926) OpenSSL NPN support (Fedor Indutny)
 * [#955](https://github.com/joyent/node/issues/955) Change ^C handling in REPL (isaacs)
@@ -3132,7 +3128,7 @@ https://github.com/iojs/io.js/commit/1b8dd65d6e3b82b6863ef38835cc436c5d30c1d5
 https://github.com/iojs/io.js/commit/de44eafd7854d06cd85006f509b7051e8540589b
 
 * Improve documentation
-* [#1095](https://github.com/joyent/node/issues/1095) error handling bug in stream.pipe() (Felix Geisendörfer)
+* [#1095](https://github.com/joyent/node/issues/1095) error handling bug in stream.pipe() (Felix Geisendo¨rfer)
 * [#1097](https://github.com/joyent/node/issues/1097) Fix a few leaks in node_crypto.cc (Ben Noordhuis)
 * [#562](https://github.com/joyent/node/issues/562) [#1078](https://github.com/joyent/node/issues/1078) Parse file:// urls properly (Ryan Petrello)
 * [#880](https://github.com/joyent/node/issues/880) Option to disable SSLv2 (Jérémy Lal)
@@ -3167,10 +3163,10 @@ https://github.com/iojs/io.js/commit/7dd22c26e4365698dc3efddf138c4d399cb912c8
 * Disable compression with OpenSSL. Improves memory perf.
 * Implement os.totalmem() and os.freemem() for SunOS (Alexandre Marangone)
 * Fix a special characters in URL regression (isaacs)
-* Fix idle timeouts in HTTPS (Felix Geisendörfer)
+* Fix idle timeouts in HTTPS (Felix Geisendo¨rfer)
 * SlowBuffer.write() with 'ucs2' throws ReferenceError. (koichik)
 * http.ServerRequest 'close' sometimes gets an error argument
-(Felix Geisendörfer)
+(Felix Geisendo¨rfer)
 
 * Doc improvements
 * cleartextstream.destroy() should close(2) the socket. Previously was being
@@ -3186,7 +3182,7 @@ https://github.com/iojs/io.js/commit/c85455a954411b38232e79752d4abb61bb75031b
 
 * Don't emit error on ECONNRESET from read() [#670](https://github.com/joyent/node/issues/670)
 * Fix: Multiple pipes to the same stream were broken [#929](https://github.com/joyent/node/issues/929)
-(Felix Geisendörfer)
+(Felix Geisendo¨rfer)
 
 * URL parsing/formatting corrections [#954](https://github.com/joyent/node/issues/954) (isaacs)
 * make it possible to do repl.start('', stream) (Wade Simmons)
@@ -3400,7 +3396,7 @@ https://github.com/iojs/io.js/commit/73f53e12e4a5b9ef7dbb4792bd5f8ad403094441
 * Primordial mingw build (Bert Belder)
 * HTTPS server
 * Built in debugger 'node debug script.js'
-* realpath files during module load (Mihai Călin Bazon)
+* realpath files during module load (Mihai Calin Bazon)
 * Rename net.Stream to net.Socket (existing name will continue to be
 supported)
 
@@ -3514,7 +3510,7 @@ https://github.com/iojs/io.js/commit/1582cfebd6719b2d2373547994b3dca5c8c569c0
 * Simpler querystring parsing; breaks API (Peter Griess)
 * HTTP trailers (Mark Nottingham)
 * http 100-continue support (Mark Nottingham)
-* Module system simplifications (Herbert Vojčík, isaacs, Tim-Smart)
+* Module system simplifications (Herbert Vojcík, isaacs, Tim-Smart)
 - remove require.async
 - remove registerExtension, add .extensions
 - expose require.resolve
@@ -3601,7 +3597,7 @@ https://github.com/iojs/io.js/commit/2a4568c85f33869c75ff43ccd30f0ec188b43eab
 
 https://github.com/iojs/io.js/commit/0174ceb6b24caa0bdfc523934c56af9600fa9b58
 
-* Added env to child_process.exec (Сергей Крыжановский)
+* Added env to child_process.exec (?????? ????????????)
 * Allow modules to optionally be loaded in separate contexts
 with env var NODE_MODULE_CONTEXTS=1.
 
