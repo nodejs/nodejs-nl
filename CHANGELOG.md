@@ -16,7 +16,7 @@
 	- [LTTng](http://lttng.org/) (_Linux Trace Toolkit Next Generation_) toegevoegd wanneer gecompileerd met de `--with-lttng` optie. _Trace points_ komen overeen met die beschikbaar voor DTrace en EWT. [#702](https://github.com/iojs/io.js/pull/702) (@thekemkid)
 * **docs**:
 	- Vele documentatie updates, zie individuele commits
-	- Nieuwe **Errors** pagina die Javascript errors, V8 specificaties en io.js errors in detail uitlegt. (@chrisdickinson)
+	- Nieuwe **Errors** pagina die Javascript errors, V8 specifieke errors en io.js specifieke errors in detail uitlegt. (@chrisdickinson)
 * **npm** upgrade to 2.5.1, short changelog:
 	- [npm/0e8d473](https://github.com/npm/npm/commit/0e8d4736a1cbdda41ae8eba8a02c7ff7ce80c2ff) [#7281](https://github.com/npm/npm/issues/7281) `npm-registry-mock@1.0.0`: Clean up API, set `connection: close`, which makes tests pass on io.js 1.1.x. ([@robertkowalski](https://github.com/robertkowalski))
 	- [npm/f9313a0](https://github.com/npm/npm/commit/f9313a066c9889a0ee898d8a35676e40b8101e7f) [#7226](https://github.com/npm/npm/issues/7226) Ensure that all request
