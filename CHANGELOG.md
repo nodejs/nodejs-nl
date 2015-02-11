@@ -5,17 +5,18 @@
 ### Opmerkelijke vernanderingen
 
 * **stream**:
-    - Simpler stream construction, see [readable-stream/issues#102](https://github.com/iojs/readable-stream/issues/102) for details. This extends the streams base objects to make their constructors accept default implementation methods, reducing the boilerplate required to implement custom streams. An updated version of readable-stream will eventually be released to match this change in core. (@sonewman)
+	- Een gemakkelijkere _stream_ constructie, zie [readable-stream/issues#102](https://github.com/iojs/readable-stream/issues/102) voor details. Dit bouwt voort op het  _streams_ basis object om standaard implementatie methodes te accepteren voor hun _contructors_. Dit verminderd de _boilerplate_ die nodig is voor het implementeren van aangepaste _streams_. Een geüpdatete versie van de _readable-stream_ zal er uiteindelijk komen om deze verandering te matchen in de _core_. (@sonewman)
+
 * **dns**:
-    - `lookup()` now supports an `'all'` boolean option, default to `false` but when turned on will cause the method to return an array of *all* resolved names for an address, see, [#744](https://github.com/iojs/io.js/pull/744) (@silverwind)
-* **assert**:
-    - Remove `prototype` property comparison in `deepEqual()`, considered a bugfix, see [#636](https://github.com/iojs/io.js/pull/636) (@vkurchatkin)
-		- Introduce a `deepStrictEqual()` method to mirror `deepEqual()` but performs strict equality checks on primitives, see [#639](https://github.com/iojs/io.js/pull/639) (@vkurchatkin)
+	- `lookup()` ondersteund nu een `'all'` boolean optie, standaard `false` maar wanneer aangezet word zal de methode een array teruggeven van *alle* opgeloste namen voor een adres, zie [#744](https://github.com/iojs/io.js/pull/744) (@silverwind)
+* **assert**:	
+	- `prototype` eigenschap vergelijking verwijderd in `deepEqual()`, word aanzien als een _bugfix_, zie [#636](https://github.com/iojs/io.js/pull/636) (@vkurchatkin)
+	- `deepStrictEqual()` methode geïntroduceerd om de werking van `deepEqual()` na te doen maar doet dan een strikte vergelijking op primitieve, zie [#639](https://github.com/iojs/io.js/pull/639) (@vkurchatkin)
 * **tracing**:
-		- Add [LTTng](http://lttng.org/) (Linux Trace Toolkit Next Generation) when compiled with the  `--with-lttng` option. Trace points match those available for DTrace and ETW. [#702](https://github.com/iojs/io.js/pull/702) (@thekemkid)
+	- [LTTng](http://lttng.org/) (_Linux Trace Toolkit Next Generation_) toegevoegd wanneer gecompileerd met de `--with-lttng` optie. _Trace points_ komen overeen met die beschikbaar voor DTrace en EWT. [#702](https://github.com/iojs/io.js/pull/702) (@thekemkid)
 * **docs**:
-		- Lots of doc updates, see individual commits
-		- New **Errors** page discussing JavaScript errors, V8 specifics, and io.js specific error details. (@chrisdickinson)
+	- Vele documentatie updates, zie individuele commits
+	- Nieuwe **Errors** pagina die Javascript errors, V8 specificaties en io.js errors in detail uitlegt. (@chrisdickinson)
 * **npm** upgrade to 2.5.1, short changelog:
 	- [npm/0e8d473](https://github.com/npm/npm/commit/0e8d4736a1cbdda41ae8eba8a02c7ff7ce80c2ff) [#7281](https://github.com/npm/npm/issues/7281) `npm-registry-mock@1.0.0`: Clean up API, set `connection: close`, which makes tests pass on io.js 1.1.x. ([@robertkowalski](https://github.com/robertkowalski))
 	- [npm/f9313a0](https://github.com/npm/npm/commit/f9313a066c9889a0ee898d8a35676e40b8101e7f) [#7226](https://github.com/npm/npm/issues/7226) Ensure that all request
@@ -23,7 +24,7 @@ settings are copied onto the agent. ([@othiym23](https://github.com/othiym23))
 	- [npm/fec4c96](https://github.com/npm/npm/commit/fec4c967ee235030bf31393e8605e9e2811f4a39) Allow `--no-proxy` to override `HTTP_PROXY` setting in environment. ([@othiym23](https://github.com/othiym23))
 	- [npm/9d61e96](https://github.com/npm/npm/commit/9d61e96fb1f48687a85c211e4e0cd44c7f95a38e) `npm outdated --long` now includes a column showing the type of dependency. ([@watilde](https://github.com/watilde))
 * **libuv** upgrade to 1.4.0, see [libuv ChangeLog](https://github.com/libuv/libuv/blob/v1.x/ChangeLog)
-* Add new collaborators:
+* Toevoeging van nieuwe collaborators:
 	- Aleksey Smolenchuk (@lxe)
 	- Shigeki Ohtsu (@shigeki)
 
@@ -245,7 +246,7 @@ to 3-Stable
 
 ## 2015-01-20, Version 1.0.3, @rvagg
 
-### Opmerkelijke vernaderingen
+### Opmerkelijke veranderingen
 
 * V8 upgrade from 3.31 to 4.1, this is not a major upgrade, the version number "4.1" signifies tracking towards Chrome 41. The 3.31 branch is now not tracking towards a stable release.
 * Re-enable Windows XP / 2003 support
@@ -334,23 +335,23 @@ _Rebuild due to stale build slave git reflogs for 1.0.0 release_
 
 --------------------------------------
 
-Hieronder vind je een overzicht van de veranderingen, die van toepassing zijn op gebruikers, van de io.js v1.0.0 release ten opzichtte van de _stabiele_ Node.js release, v0.10.35.
+Hieronder vind je een overzicht van de veranderingen, die van toepassing zijn op gebruikers, van de io.js v1.0.0 release ten opzichten van de _stabiele_ Node.js release, v0.10.35.
 Op het moment van de v1.0.0 release is de laatste _onstabiele_ Node.js release v0.11.14 met veel vooruitgang naar v0.11.35.
-De io.js _codebase_ neemt een meerderheid van de veranderingen van de v0.11 _branch_ van de [joyent/node](https://github.com/joyent/node) _repository_ over en kan daarom gezien worden als een extenie op v0.11.
+De io.js _codebase_ neemt een meerderheid van de veranderingen van de v0.11 _branch_ van de [joyent/node](https://github.com/joyent/node) _repository_ over en kan daarom gezien worden als een extensie op v0.11.
 
-## Overzicht van de veranderinen van Node.js v0.10.35 naar io.js v1.0.0
+## Overzicht van de veranderingen van Node.js v0.10.35 naar io.js v1.0.0
 
 ### Algemeen
 
-- The V8 JavaScript engine bundled with io.js was upgraded dramatically, from version 3.14.5.9 in Node.js v0.10.35 and 3.26.33 in Node.js v0.11.14 to 3.31.74.1 for io.js v1.0.0. This brings along many fixes and performance improvements, as well as additional support for new ES6 language features! For more information on this, check out [the io.js ES6 page](https://iojs.org/es6.html).
-- Other bundled technologies were upgraded:
-- c-ares: 1.9.0-DEV to 1.10.0-DEV
-- http_parser: 1.0 to 2.3
-- libuv: 0.10.30 to 1.2.0
-- npm: 1.4.28 to 2.1.18
-- openssl: 1.0.1j to 1.0.1k
-- punycode: 1.2.0 to 1.3.2.
-- Performance and stability improvements on all platforms.
+- De V8 Javascript _engine_, die gebundeld komt met io.js, is dramatisch geüpgraded van versie 3.14.5.9 in Node.js v0.10.35 en 3.26.33 in Node.js v0.11.14 naar 3.31.74.1 voor io.js v1.0.0. Dit brengt vele oplossingen en prestatie verbeteringen met zich mee, net zoals extra ondersteuning voor nieuwe ES6 functies! Voor meer info hierover zie [de io.js ES6 pagina (in het Engels)](https://iojs.org/es6.html).
+- Andere gebundelde technologieën die geüpgraded zijn:
+	- c-ares: 1.9.0-DEV to 1.10.0-DEV
+	- http_parser: 1.0 to 2.3
+	- libuv: 0.10.30 to 1.2.0
+	- npm: 1.4.28 to 2.1.18
+	- openssl: 1.0.1j to 1.0.1k
+	- punycode: 1.2.0 to 1.3.2.
+	- Performance and stability improvements on all platforms.
 
 ### buffer
 
@@ -487,13 +488,13 @@ https://iojs.org/api/smalloc.html
 
 https://iojs.org/api/stream.html
 
-De veranderinen aan de _streams_ zijn niet zo drastisch als de overgang van _streams1_ naar _streams2_.
+De veranderingen aan de _streams_ zijn niet zo drastisch als de overgang van _streams1_ naar _streams2_.
 Ze zijn eerder een verfijning van de bestaande ideeën en moeten de API duidelijker maken voor mensen en sneller voor computers.
-In zijn geheel word er naar de veranderingen verwezen als _"streams3"_ maar de veranderingen zouden grotendeels onopgemerkt moeten blijven voor de meerderheid van de _stream_ gebruikers. 
+In zijn geheel wordt er naar de veranderingen verwezen als _"streams3"_ maar de veranderingen zouden grotendeels onopgemerkt moeten blijven voor de meerderheid van de _stream_ gebruikers. 
 
 #### Readable streams
 
-De distictie tussen _"flowing"_ en _"non-flowing"_ modusen is geoptimaliseerd. In _"flowing"_ modus gaan is niet langer een onomkeerbare operatie.
+De distinctie tussen _"flowing"_ en _"non-flowing"_ modi is geoptimaliseerd. In _"flowing"_ modus gaan is niet langer een onomkeerbare operatie.
 Het is mogelijk om terug naar een _"non-flowing"_ modus te gaan vanuit een _"flowing"_ modus.
 Alsook, de twee modi vloeien nu door dezelfde code in plaats van methodes te vervangen.
 Elke keer data word teruggeven als resultaat van een `.read` _call_ word die data *ook* uitgezonden op het `"data"` event.
@@ -502,23 +503,23 @@ Zoals eerder zal het toevoegen van een _listener_ op de `"readable"` en `"data"`
 
 #### Writable streams
 
-De mogelijkheid om een "_bulk write_" te doen op onderligende middelen is toegevoegd aan de `Writeable` _stream_.
+De mogelijkheid om een "_bulk write_" te doen op onderliggende middelen is toegevoegd aan de `Writeable` _stream_.
 Voor _stream_ implementeerders, je kan signaliseren dat een _stream bulk-writable_ is door een [_writev](https://iojs.org/api/stream.html#stream_writable_writev_chunks_callback) methode te specifiëren.
 _Bulk writes_ komen voor in 2 situaties:
 
-1. Wanneer een _bulk-writable stream_ zijn backlog van gebufferde schrijf verzoeken aan het opkuisen is.
+1. Wanneer een _bulk-writable stream_ zijn _backlog_ van gebufferde schrijf verzoeken aan het opkuisen is.
 2. of als een eindgebruiker gebruikt maakt van de nieuwe `.cork()` en `.uncork()` API methodes.
 
 `.cork` en `.uncork` geven de eindgebruiker controle over het gedrag van het bufferen van de _writable streams_ onafhankelijk van de uitgeoefende tegendruk.
 `.cork` duid aan dat de _stream_ nieuwe schrijf operaties zou moeten accepteren (tot op `highWaterMark`),
 `.uncork` reset dat gedrag en probeerd een _bulk-write_ te doen van alle gebuferde schrijf opdrachten naar de onderligende middelen.
 
-De enigste _core stream_ API die **momenteel** `_writev` implementeerd is `net.Socket`.
+De enige _core stream_ API die **momenteel** `_writev` implementeerd is `net.Socket`.
 
 In toevoeging tot de _bulk-write_ veranderingen is ook de performantie van repetitieve kleine schrijf operaties naar _non-bulk-writable streams_ (zoals de `fs.WriteStream`) er sterk op vooruit gegaan.
 Gebruikers die grote log volume _streams_ naar de harde schijf pijpen zouden een vooruitgang moeten zien.  
 
-Voor een gedetaileerd overzicht van hoe _streams3_ werken [zie did diagram](https://cloud.githubusercontent.com/assets/37303/5728694/f9a3e300-9b20-11e4-9e14-a6938b3327f0.png).
+Voor een gedetailleerd overzicht van hoe _streams3_ werken [zie did diagram](https://cloud.githubusercontent.com/assets/37303/5728694/f9a3e300-9b20-11e4-9e14-a6938b3327f0.png).
 
 ### timers
 
@@ -570,13 +571,13 @@ https://iojs.org/api/util.html
 
 https://iojs.org/api/v8.html
 
-`v8` is een nieuwe core module for directe communicatie met de V8 engine.
+`v8` is een nieuwe _core_ module voor directe communicatie met de V8 engine.
 
 ### vm
 
 https://iojs.org/api/vm.html
 
-De `vm` module is herschreven, gebaseerd op de excellente native module [Contextify](https://github.com/brianmcd/contextify), om beter te werken. Alle funtionaliteit van Contextify zit nu mee in de core, zelfs met verbeteringen!
+De `vm` module is herschreven, gebaseerd op de excellente native module [Contextify](https://github.com/brianmcd/contextify), om beter te werken. Alle functionaliteit van Contextify zit nu mee in de _core_, zelfs met verbeteringen!
 
 - Added `vm.isContext(object)` method to determine whether `object` has been contextified.
 - Added `vm.runInDebugContext(code)` method to compile and execute `code` inside the V8 debug context.
@@ -598,7 +599,7 @@ https://iojs.org/api/zlib.html
 
 https://iojs.org/api/addons.html
 
-In het algemeen is het aangeraden om [NAN](https://github.com/rvagg/nan) te gebruiken als compatibiliteits laag voor addons. Dit zal ook helpen in opkomende veranderingen in de V8 en Node/io.js C++ API. Het merendeel van de volgende veranderinen worden al afgehandeld door NAN-specifieke wrappers
+In het algemeen is het aangeraden om [NAN](https://github.com/rvagg/nan) te gebruiken als compatibiliteit laag voor addons. Dit zal ook helpen in opkomende veranderingen in de V8 en Node/io.js C++ API. Het merendeel van de volgende veranderingen worden al afgehandeld door NAN-specifieke _wrappers_
 
 #### V8 highlights
 
