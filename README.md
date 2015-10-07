@@ -1,5 +1,5 @@
-# iojs-nl
-[io.js](https://iojs.org/) i18n in het Nederlands
+# nodejs-nl
+[Node.js](https://nodejs.org/) i18n in het Nederlands
 
 ## Members
 - Yoshua Wuyts ([@yoshuawuyts](https://github.com/yoshuawuyts))
@@ -9,7 +9,7 @@
 
 ## FAQ
 #### What is this repository? 
-It's one of many repositories that focus on bringing the io.js docs to multiple 
+It's one of many repositories that focus on bringing the Node.js docs to multiple 
 languages.
 
 #### Sounds cool. Can I join?
